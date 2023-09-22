@@ -1,0 +1,1 @@
+for f in *.txt; do g=`echo $f | sed -e 's/\.txt/.dat/g' `; echo $g; sed -e 's/\[//g; s/\]//g' $f | awk -F "," '{d=(NF-1)/3; print $1,$(2+2*d),$(1+2*d),$2,$(1+d); }' > shit.dat; sort -gk1 -k2 shit.dat > $g ; done;

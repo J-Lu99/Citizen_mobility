@@ -1,0 +1,4512 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    183274,       4504]
+NotebookOptionsPosition[    177806,       4317]
+NotebookOutlinePosition[    178184,       4333]
+CellTagsIndexPosition[    178141,       4330]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Entorno", "Title",
+ CellChangeTimes->{{3.894929009986349*^9, 3.894929027613259*^9}},
+ FontSize->72,
+ Background->GrayLevel[0.85]],
+
+Cell[CellGroupData[{
+
+Cell["General", "Chapter",
+ CellChangeTimes->{{3.894929260144887*^9, 3.894929275957697*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"SetDirectory", "[", "\"\<Data\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"poblacion", "=", 
+     RowBox[{"Import", "[", "\"\<transport_zones_properties.csv\>\"", "]"}]}],
+     " ", ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"zonas0", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "17", "}"}], ",", 
+       RowBox[{"{", "20", "}"}], ",", 
+       RowBox[{"{", "23", "}"}], ",", 
+       RowBox[{"{", "23", "}"}], ",", 
+       RowBox[{"{", "24", "}"}], ",", 
+       RowBox[{"{", "24", "}"}], ",", 
+       RowBox[{"{", "28", "}"}], ",", 
+       RowBox[{"{", "37", "}"}], ",", 
+       RowBox[{"{", "38", "}"}], ",", 
+       RowBox[{"{", "46", "}"}], ",", 
+       RowBox[{"{", "64", "}"}], ",", 
+       RowBox[{"{", "70", "}"}], ",", 
+       RowBox[{"{", "72", "}"}], ",", 
+       RowBox[{"{", "84", "}"}], ",", 
+       RowBox[{"{", "88", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"municipios", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Tpo", "=", 
+     RowBox[{"Transpose", "[", "poblacion", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"For", "[", 
+    RowBox[{
+     RowBox[{"i", "=", "2"}], ",", 
+     RowBox[{"i", "<", 
+      RowBox[{"Length", "[", 
+       RowBox[{"Tpo", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}]}], ",", 
+     RowBox[{"i", "++"}], ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Count", "[", 
+         RowBox[{"municipios", ",", 
+          RowBox[{
+           RowBox[{"Tpo", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "==", "0"}], ",", 
+       RowBox[{"AppendTo", "[", 
+        RowBox[{"municipios", ",", 
+         RowBox[{
+          RowBox[{"Tpo", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "]"}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"poblacion", "//", "MatrixForm"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"zonesXmun", "=", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"SequenceCases", "[", 
+         RowBox[{
+          RowBox[{"Tpo", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"p", ":", 
+             RowBox[{"Repeated", "[", 
+              RowBox[{"municipios", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "}"}], 
+           "\[RuleDelayed]", 
+           RowBox[{"Length", "[", 
+            RowBox[{"{", "p", "}"}], "]"}]}]}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"Length", "[", "municipios", "]"}]}], "}"}]}], "]"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"zonesXmun", "=", 
+     RowBox[{"Insert", "[", 
+      RowBox[{"zonesXmun", ",", "0", ",", "1"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"muniindx", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"1", "+", 
+          RowBox[{"Sum", "[", 
+           RowBox[{
+            RowBox[{"zonesXmun", "[", 
+             RowBox[{"[", "j", "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"j", ",", "i"}], "}"}]}], "]"}]}], ",", 
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           RowBox[{"zonesXmun", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", 
+             RowBox[{"i", "+", "1"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "municipios", "]"}]}], "}"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8949290016710353`*^9, 3.894929008267599*^9}, {
+  3.8950108808071795`*^9, 3.8950108842137537`*^9}}],
+
+Cell[BoxData["\<\"D:\\\\Jose\\\\Investigaci\[OAcute]n\\\\Sistemas complejos\\\
+\\Movilidad\\\\Art\[IAcute]culo sobre encuestas\\\\Programas\\\\Data\"\>"], \
+"Output",
+ CellChangeTimes->{3.895943883795454*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Funciones y matrices generales", "Chapter",
+ CellChangeTimes->{{3.8949290643851843`*^9, 3.8949291176911306`*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"uniform", "[", "matrixdesun_", "]"}], ":=", " ", 
+   RowBox[{"Transpose", "[", 
+    RowBox[{"Insert", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{"Insert", "[", 
+        RowBox[{"matrixdesun", ",", 
+         RowBox[{"Table", "[", 
+          RowBox[{"0", ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "1", ",", "118"}], "}"}]}], "]"}], ",", 
+         "zonas0"}], "]"}], "]"}], ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "134"}], "}"}]}], "]"}], ",", "zonas0"}],
+      "]"}], "]"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"compress", "[", 
+    RowBox[{"matrix_", ",", "mi_"}], "]"}], ":=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        SubsuperscriptBox["\[Sum]", 
+         RowBox[{"m", "=", 
+          RowBox[{
+           RowBox[{"mi", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], 
+         RowBox[{
+          RowBox[{"mi", "[", 
+           RowBox[{"[", "j", "]"}], "]"}], "[", 
+          RowBox[{"[", "2", "]"}], "]"}]], 
+        RowBox[{
+         SubsuperscriptBox["\[Sum]", 
+          RowBox[{"n", "=", 
+           RowBox[{
+            RowBox[{"mi", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], 
+          RowBox[{
+           RowBox[{"mi", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}]], 
+         RowBox[{
+          RowBox[{"matrix", "[", 
+           RowBox[{"[", "n", "]"}], "]"}], "[", 
+          RowBox[{"[", "m", "]"}], "]"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", "15"}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Verosimilitud", "[", 
+    RowBox[{"encList_", ",", "TotalVF_", ",", "Prob_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Log", "[", 
+       RowBox[{
+        RowBox[{"Total", "[", 
+         RowBox[{"encList", ",", 
+          RowBox[{"{", "2", "}"}]}], "]"}], "!"}], "]"}], "-", 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{"Log", "[", 
+         RowBox[{"encList", "!"}], "]"}], ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}], "+", 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", "encList", ")"}], "*", 
+         RowBox[{"Log", "[", 
+          RowBox[{"Prob", "/.", " ", 
+           RowBox[{"0.", "\[Rule]", 
+            RowBox[{"10", "^", 
+             RowBox[{"-", "5"}]}]}]}], "]"}]}], ",", 
+        RowBox[{"{", "2", "}"}]}], "]"}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"TotalVF", "/.", " ", 
+      RowBox[{"0.", "\[Rule]", "1"}]}], " ", ")"}]}]}], "\[IndentingNewLine]",
+   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NewArtificialSurv", "[", 
+   RowBox[{"TotalPorFila_", ",", "Prob_", ",", "NumRows_"}], "]"}], " ", ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"BinCounts", "[", 
+      RowBox[{"#", ",", 
+       RowBox[{"{", 
+        RowBox[{"0.5", ",", 
+         RowBox[{"NumRows", "+", "0.5"}], ",", "1"}], "}"}]}], "]"}], "&"}], 
+    ")"}], "/@", 
+   RowBox[{"(", 
+    RowBox[{"MapIndexed", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"RandomChoice", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Prob", "[", 
+              RowBox[{"[", 
+               RowBox[{"#2", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}], "/.", " ", 
+             RowBox[{"0.", "\[Rule]", 
+              RowBox[{"10", "^", 
+               RowBox[{"-", "5"}]}]}]}], ")"}], "\[Rule]", 
+           RowBox[{"Range", "[", "NumRows", "]"}]}], ",", "#1"}], "]"}], 
+        "&"}], ")"}], ",", "TotalPorFila"}], "]"}], ")"}]}]}]}], "Input",
+ CellChangeTimes->{{3.894929070041431*^9, 3.8949290816996536`*^9}, {
+   3.894929225562846*^9, 3.8949292371584787`*^9}, {3.89493008570479*^9, 
+   3.8949301127720537`*^9}, {3.8949301884555497`*^9, 3.894930201613489*^9}, {
+   3.8949304125956283`*^9, 3.8949304149723854`*^9}, {3.894930447583949*^9, 
+   3.894930453554234*^9}, 3.894930890372568*^9, {3.89493103351571*^9, 
+   3.894931067395336*^9}, 3.8949317075300636`*^9, {3.8950109102534547`*^9, 
+   3.8950109219569607`*^9}, {3.8950151642646255`*^9, 3.895015184614555*^9}}]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Comparaci\[OAcute]n por municipios.", "Title",
+ CellChangeTimes->{{3.894928858904978*^9, 3.894928887906409*^9}, {
+  3.8949311369819403`*^9, 3.894931150655424*^9}},
+ FontSize->72,
+ Background->RGBColor[
+  0.9254901960784314, 0.8509803921568627, 0.8509803921568627]],
+
+Cell[CellGroupData[{
+
+Cell["Matrices ", "Chapter",
+ CellChangeTimes->{{3.894507690606474*^9, 3.8945077773019223`*^9}, 
+   3.894541784573419*^9, {3.89492913764612*^9, 3.8949291454446144`*^9}, {
+   3.8949309667230625`*^9, 3.8949310023065324`*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"encuesta", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Import", "[", 
+         RowBox[{"\"\<encuesta_Integer.dat\>\"", ",", 
+          RowBox[{"Path", "\[Rule]", "\"\<Encuesta\>\""}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{";;", "134"}], ",", ";;"}], "]"}], "]"}], ",", "muniindx"}],
+       "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"hw", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_hw_st_week.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"allt", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_allt_unst_all.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"alltw", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_allt_unst_week.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"alltstw", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_allt_st_week.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mo", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_mo_unst_all.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mostw", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_mo_st_week.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"no", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_no_unst_all.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nostw", "=", 
+     RowBox[{"compress", "[", 
+      RowBox[{
+       RowBox[{"Import", "[", 
+        RowBox[{"\"\<ZMeanm_no_st_week.csv\>\"", ",", 
+         RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}], ",", 
+       "muniindx"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "CUJAE", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"alltravelCUJAE", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<movilidad_por_muniCUJAE.csv\>\"", ",", 
+       RowBox[{"Path", "->", "\"\<Movilidad Municipal CUJAE\>\""}]}], "]"}]}],
+     ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{
+  3.87634126594221*^9, {3.890064150749963*^9, 3.8900642717607236`*^9}, {
+   3.8900643783370185`*^9, 3.890064382806677*^9}, {3.890064431493367*^9, 
+   3.890064431818321*^9}, {3.8900670020474935`*^9, 3.890067124050756*^9}, 
+   3.890068453637577*^9, 3.890071841089015*^9, {3.8900799200662117`*^9, 
+   3.890079988669649*^9}, {3.8900802520441*^9, 3.890080286476801*^9}, {
+   3.8900804603950777`*^9, 3.8900804858202114`*^9}, {3.8900805956964517`*^9, 
+   3.8900806074061513`*^9}, {3.890693607756599*^9, 3.8906936105864544`*^9}, 
+   3.890693958976104*^9, {3.890697869386347*^9, 3.8906979664046507`*^9}, {
+   3.8906988522369432`*^9, 3.890698854377507*^9}, {3.890698901279066*^9, 
+   3.890698909046831*^9}, {3.8907003978574705`*^9, 3.890700443113073*^9}, {
+   3.8907028885903225`*^9, 3.8907029039973726`*^9}, {3.894506567574443*^9, 
+   3.8945065730605245`*^9}, {3.894506609205748*^9, 3.8945066096121297`*^9}, {
+   3.8945067041414795`*^9, 3.8945067121808944`*^9}, {3.8945068551385093`*^9, 
+   3.8945068944465275`*^9}, {3.8945069632903924`*^9, 
+   3.8945070674630675`*^9}, {3.894507173723909*^9, 3.894507247032667*^9}, 
+   3.8945074852106504`*^9, {3.8945084260968647`*^9, 3.89450842831565*^9}, {
+   3.8945088054399176`*^9, 3.894508832425275*^9}, {3.8945088647251434`*^9, 
+   3.8945089006991234`*^9}, {3.8945089316542253`*^9, 
+   3.8945089654091983`*^9}, {3.8945424242436466`*^9, 3.894542424884286*^9}, 
+   3.8945424786109285`*^9, {3.8945429600618587`*^9, 3.8945429654835787`*^9}, {
+   3.894543489746481*^9, 3.8945434899496174`*^9}, {3.8945435621642113`*^9, 
+   3.8945435855898137`*^9}, {3.8945436271369996`*^9, 3.894543639013747*^9}, {
+   3.894543701300816*^9, 3.8945437045665264`*^9}, {3.894544256069642*^9, 
+   3.8945442605559173`*^9}, {3.894544294621132*^9, 3.8945442997638407`*^9}, {
+   3.894544343314555*^9, 3.8945443451427593`*^9}, {3.89456363546903*^9, 
+   3.8945636741917095`*^9}, {3.894578613319023*^9, 3.894578665090489*^9}, {
+   3.8945787350179443`*^9, 3.8945787437052603`*^9}, 3.894929153100806*^9, {
+   3.8949309869748297`*^9, 3.8949309889298525`*^9}, {3.895010944724296*^9, 
+   3.8950109530816326`*^9}, {3.895011345399786*^9, 3.8950113570232315`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Para comprobaciones de linealidad", "Chapter",
+ CellChangeTimes->{{3.8949285844686427`*^9, 3.8949286095498047`*^9}, 
+   3.89492868284282*^9, {3.8949287489467974`*^9, 3.894928764510562*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"VEF", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"VSurveyE", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Gray", ",", 
+       RowBox[{"PointSize", "[", "Medium", "]"}]}], "}"}]}], ",", " ", 
+    RowBox[{"AxesLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LiArtificial", "[", "n", "]"}], ",", 
+       RowBox[{"LiE", "[", "n", "]"}]}], "}"}]}], ",", 
+    RowBox[{"PlotLegends", "\[Rule]", 
+     RowBox[{
+     "{", "\"\<Encuesta Vs Todos los viajes (artificiales/ND)\>\"", "}"}]}]}],
+    "]"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"VAllCUJAEF", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"VSurveyE", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AxesLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LiArtificial", "[", "n", "]"}], ",", 
+       RowBox[{"LCUJAE", "[", "n", "]"}]}], "}"}]}], ",", 
+    RowBox[{"PlotLegends", "\[Rule]", 
+     RowBox[{
+     "{", "\"\<Todos los viajes CUJAE Todos los viajes CUJAETodos los viajes \
+(artificiales/ND)\>\"", "}"}]}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Gray", ",", 
+       RowBox[{"PointSize", "[", "Medium", "]"}]}], "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fluxes", "[", "mat_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Total", "[", "mat", "]"}], "-", 
+    RowBox[{"Total", "[", 
+     RowBox[{"Transpose", "[", "mat", "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Total", "[", 
+  RowBox[{"Total", "[", "alltravel", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Fluxes", "[", "alltravel", "]"}], ",", 
+      RowBox[{"Fluxes", "[", 
+       RowBox[{"89.6523", "*", "encuesta"}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Fluxes", "[", "alltravel", "]"}], ",", 
+      RowBox[{"Fluxes", "[", "alltravel69", "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Fluxes", "[", "homework", "]"}], ",", 
+     RowBox[{"Fluxes", "[", "alltravel69", "]"}]}], "}"}], "]"}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8949287081122713`*^9, 3.8949287222396283`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con todos los viajes", "Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}},
+ Background->RGBColor[1, 0.9, 0.8]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"MAModel", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"allt", ",", 
+         RowBox[{"Total", "[", 
+          RowBox[{"allt", ",", 
+           RowBox[{"{", "2", "}"}]}], "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+   3.8945426080871286`*^9, 3.8945426083215*^9}, {3.8949252720319653`*^9, 
+   3.894925294631999*^9}, {3.894925330557311*^9, 3.894925341182129*^9}, 
+   3.894925417926422*^9, {3.89492544971085*^9, 3.89492545099218*^9}, {
+   3.895943934571823*^9, 3.8959439474825726`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MAEncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MAVSurveyE", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+       RowBox[{"NewArtificialSurv", "[", 
+        RowBox[{"MAEncuestasPorZona", ",", "MAModel", ",", "15"}], "]"}], ",",
+        "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.873683709733906*^9, 3.8736837144214272`*^9}, {
+   3.873683820081643*^9, 3.8736838228020144`*^9}, {3.8736852182679043`*^9, 
+   3.873685222721015*^9}, {3.8736852589302454`*^9, 3.873685265010343*^9}, {
+   3.873685360649269*^9, 3.8736853736180477`*^9}, {3.8736865158861437`*^9, 
+   3.873686516667264*^9}, 3.873689582710504*^9, {3.8736905414920716`*^9, 
+   3.873690543759578*^9}, {3.8746732505288725`*^9, 3.874673250935238*^9}, {
+   3.8949253648093567`*^9, 3.894925382484424*^9}, {3.8949254592893844`*^9, 
+   3.8949254650081487`*^9}, {3.894931265623783*^9, 3.8949312663424997`*^9}, {
+   3.8959439623747683`*^9, 3.895943993029874*^9}, 3.895944948990721*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Encuesta", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"MAVEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"encuesta", ",", "MAEncuestasPorZona", ",", "MAModel"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Casa", " ", "trabajo"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFhw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"hw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModhw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"hw", ",", "MAVxFhw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVhw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModhw", ",", "15"}], "]"}], 
+         ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFalltw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModalltw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltw", ",", "MAVxFalltw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAValltw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModalltw", ",", "15"}], "]"}],
+          ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFalltstw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModalltstw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltstw", ",", "MAVxFalltstw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAValltstw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModalltstw", ",", "15"}], 
+          "]"}], ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", 
+       "100"}], "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFmo", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"mo", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModmo", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mo", ",", "MAVxFmo"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVmo", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModmo", ",", "15"}], "]"}], 
+         ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "10"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Ma\[NTilde]ana", " ", "estable", " ", "entre", " ", "semana"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFmostw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"mostw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModmostw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mostw", ",", "MAVxFmostw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVmostw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModmostw", ",", "15"}], "]"}],
+          ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "inestable"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFno", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"no", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModno", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"no", ",", "MAVxFno"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVno", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModno", ",", "15"}], "]"}], 
+         ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVxFnostw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAModnostw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"nostw", ",", "MAVxFnostw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVnostw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"MAEncuestasPorZona", ",", "MAModnostw", ",", "15"}], "]"}],
+          ",", "MAEncuestasPorZona", ",", "MAModel"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "alltravelCUJAE", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAViajesPorFilaAllCUJAE", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltravelCUJAE", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MAVAllCUJAEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+      "alltravelCUJAE", ",", "MAViajesPorFilaAllCUJAE", ",", "MAModel"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.8949251927256117`*^9, 3.8949251973994565`*^9}, {
+   3.894925495400375*^9, 3.894925525468563*^9}, 3.894925584711213*^9, {
+   3.894925623181727*^9, 3.894926021087392*^9}, {3.894931282907134*^9, 
+   3.8949313199573355`*^9}, {3.8950111942261744`*^9, 3.895011197057884*^9}, {
+   3.8950114036802287`*^9, 3.8950114683069997`*^9}, {3.895011705295109*^9, 
+   3.895011708662566*^9}, {3.8959440101011105`*^9, 3.895944010382296*^9}, {
+   3.8959441057749414`*^9, 3.895944238487158*^9}, 3.895944319769535*^9, {
+   3.895944381562456*^9, 3.895944530179259*^9}, {3.895944626770134*^9, 
+   3.8959446268541594`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MAGr\[AAcute]ficasT", "=", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"ListLogPlot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "*", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"MAVSurveyE", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", "MAVEF", ",", "MAVAllCUJAEF", 
+          ",", 
+          RowBox[{"MAVhw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAValltw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAValltstw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAVmo", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAVmostw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAVno", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAVnostw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", 
+          RowBox[{"-", 
+           RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Black", ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+         "]"}]}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Todos los viajes (artificiales)\>\"", "  ", ",", 
+          "\"\<Encuesta\>\"", ",", "\"\<Casa trabajo CUJAE\>\"", ",", " ", 
+          "\"\<Casa trabajo\>\"", ",", "\"\<Viajes entre semana\>\"", ",", 
+          "\"\<Viajes entre semana de estables\>\"", ",", 
+          "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", 
+          "\"\<Viajes en la ma\[NTilde]ana entre semana de estables\>\"", 
+          ",", "\"\<Viajes en la tarde\>\"", ",", 
+          "\"\<Viajes en la tarde entre semana de estables\>\""}], "}"}]}]}], 
+      "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "1", ",", "100", ",", "1"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MAGr\[AAcute]ficasS", "=", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"ListLogPlot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "*", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"MAVSurveyE", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", "MAVEF", ",", 
+          RowBox[{"MAVhw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAValltw", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", 
+          RowBox[{"MAVmo", "[", 
+           RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", 
+          RowBox[{"-", 
+           RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Black", ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+         "]"}]}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Todos los viajes (artificiales)\>\"", "  ", ",", 
+          "\"\<Encuesta\>\"", ",", " ", "\"\<Casa trabajo\>\"", ",", 
+          "\"\<Viajes entre semana\>\"", ",", 
+          "\"\<Viajes en la ma\[NTilde]ana\>\""}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "1", ",", "100", ",", "1"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"MAGr\[AAcute]ficasCUJAEND", "=", 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"ListLogPlot", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "1"}], "*", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"MAVSurveyE", "[", 
+          RowBox[{"[", "A", "]"}], "]"}], ",", "MAVEF", ",", "MAVAllCUJAEF"}],
+         "}"}]}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", 
+       RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", 
+         RowBox[{"-", 
+          RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+      RowBox[{"LabelStyle", "\[Rule]", 
+       RowBox[{"Directive", "[", 
+        RowBox[{"Black", ",", 
+         RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+        "]"}]}], ",", 
+      RowBox[{"PlotLegends", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Todos los viajes (artificiales/ND)\>\"", "  ", ",", 
+         "\"\<Encuesta\>\"", ",", " ", "\"\<Casa trabajo\>\""}], "}"}]}]}], 
+     "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"A", ",", "1", ",", "100", ",", "1"}], "}"}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945468936302977`*^9, 
+   3.8945469025071654`*^9}, {3.8945469326361446`*^9, 3.894546938854726*^9}, {
+   3.8945493770682154`*^9, 3.8945493977417593`*^9}, {3.894579387943058*^9, 
+   3.8945793951462345`*^9}, {3.894926081658774*^9, 3.894926134227215*^9}, {
+   3.8949261779170847`*^9, 3.894926231525837*^9}, {3.8949263693368177`*^9, 
+   3.894926370305573*^9}, {3.894926744280219*^9, 3.894926749532388*^9}, {
+   3.894927055809521*^9, 3.8949270735749426`*^9}, {3.895011489389861*^9, 
+   3.8950115569483995`*^9}, {3.895012448672844*^9, 3.8950124504283857`*^9}, {
+   3.8959447208999615`*^9, 3.895944797299547*^9}, 3.8959448275503855`*^9, {
+   3.895944886355405*^9, 3.8959449023228035`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 100, 1}}, Typeset`size$$ = {
+    891., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$121274$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$121274$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`MAVSurveyE, $CellContext`A$$], \
+$CellContext`MAVEF, $CellContext`MAVAllCUJAEF, 
+          Part[$CellContext`MAVhw, $CellContext`A$$], 
+          Part[$CellContext`MAValltw, $CellContext`A$$], 
+          Part[$CellContext`MAValltstw, $CellContext`A$$], 
+          Part[$CellContext`MAVmo, $CellContext`A$$], 
+          Part[$CellContext`MAVmostw, $CellContext`A$$], 
+          Part[$CellContext`MAVno, $CellContext`A$$], 
+          Part[$CellContext`MAVnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Todos los viajes (artificiales)", "Encuesta", "Casa trabajo CUJAE", 
+          "Casa trabajo", "Viajes entre semana", 
+          "Viajes entre semana de estables", "Viajes en la ma\[NTilde]ana", 
+          "Viajes en la ma\[NTilde]ana entre semana de estables", 
+          "Viajes en la tarde", 
+          "Viajes en la tarde entre semana de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 100, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8959448065286226`*^9, 3.895944906686167*^9, 
+  3.89594496690697*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 100, 1}}, Typeset`size$$ = {
+    760., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$121304$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$121304$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`MAVSurveyE, $CellContext`A$$], $CellContext`MAVEF, 
+          Part[$CellContext`MAVhw, $CellContext`A$$], 
+          Part[$CellContext`MAValltw, $CellContext`A$$], 
+          Part[$CellContext`MAVmo, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Todos los viajes (artificiales)", "Encuesta", "Casa trabajo", 
+          "Viajes entre semana", "Viajes en la ma\[NTilde]ana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 100, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{825., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8959448065286226`*^9, 3.895944906686167*^9, 
+  3.895944967885194*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 100, 1}}, Typeset`size$$ = {
+    788., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$121600$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$121600$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`MAVSurveyE, $CellContext`A$$], \
+$CellContext`MAVEF, $CellContext`MAVAllCUJAEF}, PlotRange -> All, PlotStyle -> 
+        PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Todos los viajes (artificiales/ND)", "Encuesta", "Casa trabajo"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 100, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{853., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8959448065286226`*^9, 3.895944906686167*^9, 
+  3.895944968585371*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<Allt(xMun).swf\>\"", ",", "%"}], "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.8950178108767424`*^9, 3.895017818516674*^9}}],
+
+Cell[BoxData["\<\"Allt(xMun).swf\"\>"], "Output",
+ CellChangeTimes->{3.8950178971866064`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con casa trabajo", "Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}, {3.894542050081151*^9, 
+  3.894542056348421*^9}},
+ Background->RGBColor[0.88, 1, 0.88]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"hw", ",", 
+         RowBox[{"Total", "[", 
+          RowBox[{"hw", ",", 
+           RowBox[{"{", "2", "}"}]}], "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+  3.8945420925232563`*^9, 3.894542111353013*^9}, {3.894543873182751*^9, 
+  3.894543895716219*^9}, {3.894543963820756*^9, 3.894543978211348*^9}, {
+  3.894927330103628*^9, 3.8949273417774153`*^9}, {3.894927372779176*^9, 
+  3.894927375544587*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"EncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VSurveyE", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+       RowBox[{"NewArtificialSurv", "[", 
+        RowBox[{"EncuestasPorZona", ",", "Model", ",", "15"}], "]"}], ",", 
+       "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.873683709733906*^9, 3.8736837144214272`*^9}, {
+   3.873683820081643*^9, 3.8736838228020144`*^9}, {3.8736852182679043`*^9, 
+   3.873685222721015*^9}, {3.8736852589302454`*^9, 3.873685265010343*^9}, {
+   3.873685360649269*^9, 3.8736853736180477`*^9}, {3.8736865158861437`*^9, 
+   3.873686516667264*^9}, 3.873689582710504*^9, {3.8736905414920716`*^9, 
+   3.873690543759578*^9}, {3.8746732505288725`*^9, 3.874673250935238*^9}, 
+   3.8945439053585825`*^9, {3.8945439833851757`*^9, 3.8945439861820498`*^9}, {
+   3.8945441605917993`*^9, 3.8945441630450335`*^9}, {3.8949273562775383`*^9, 
+   3.894927395421467*^9}, {3.895011958502494*^9, 3.8950119590209084`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Encuesta", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"VEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"encuesta", ",", "EncuestasPorZona", ",", "Model"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "inestables"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFallt", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"allt", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modallt", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"allt", ",", "VxFallt"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vallt", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modallt", ",", "15"}], "]"}], ",",
+          "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFalltw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modalltw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltw", ",", "VxFalltw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Valltw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modalltw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFalltstw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modalltstw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltstw", ",", "VxFalltstw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Valltstw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modalltstw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFmo", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"mo", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modmo", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mo", ",", "VxFmo"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vmo", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modmo", ",", "15"}], "]"}], ",", 
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Ma\[NTilde]ana", " ", "estable", " ", "entre", " ", "semana"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFmostw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"mostw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modmostw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mostw", ",", "VxFmostw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vmostw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modmostw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "inestable"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFno", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"no", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modno", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"no", ",", "VxFno"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vno", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modno", ",", "15"}], "]"}], ",", 
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFnostw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modnostw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"nostw", ",", "VxFnostw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vnostw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modnostw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "alltravelCUJAE", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ViajesPorFilaAllCUJAE", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltravelCUJAE", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VAllCUJAEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"alltravelCUJAE", ",", "ViajesPorFilaAllCUJAE", ",", "Model"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.894542191364087*^9, 3.894542234680005*^9}, {
+   3.894543913157447*^9, 3.8945439476921234`*^9}, {3.8945439971840715`*^9, 
+   3.8945441450274105`*^9}, {3.894544200282346*^9, 3.8945442025791636`*^9}, {
+   3.8949273989701605`*^9, 3.8949274128154936`*^9}, {3.894927454774747*^9, 
+   3.894927503858053*^9}, 3.895011726612419*^9, {3.8950119094408264`*^9, 
+   3.8950119513185644`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}, {3.8945443970248394`*^9, 
+   3.8945443990560713`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasT", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", "VAllCUJAEF", 
+           ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vno", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vnostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Casa trabajo (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", "\"\<Casa trabajo CUJAE\>\"", ",", " ", 
+           "\"\<Todos los viajes\>\"", ",", "\"\<Viajes entre semana\>\"", 
+           ",", "\"\<Viajes entre semana de estables\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana entre semana de estables\>\"", 
+           ",", "\"\<Viajes en la tarde\>\"", ",", 
+           "\"\<Viajes en la tarde entre semana de estables\>\""}], " ", 
+          "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasS", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Casa trabajo (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", " ", "\"\<Todos los viajes\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes de estables entre semana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana de estables entre semana\>\""}], 
+          "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Gr\[AAcute]ficasCUJAEND", "=", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"ListLogPlot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "*", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"VSurveyE", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", "VAllCUJAEF"}], 
+         "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", 
+          RowBox[{"-", 
+           RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Black", ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+         "]"}]}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Casa trabajo (artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"",
+           ",", " ", "\"\<Casa trabajo CUJAE\>\""}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945422556175666`*^9, 
+   3.8945422904793534`*^9}, {3.8945427598463125`*^9, 
+   3.8945427765370717`*^9}, {3.8945433289752007`*^9, 
+   3.8945433612290907`*^9}, {3.894544173060465*^9, 3.894544237864303*^9}, {
+   3.894547327246787*^9, 3.8945473471857634`*^9}, {3.894549152453555*^9, 
+   3.8945491617176957`*^9}, {3.894549441777193*^9, 3.8945494641601524`*^9}, {
+   3.8945793568456373`*^9, 3.8945793649879045`*^9}, {3.8949275244677477`*^9, 
+   3.8949276231544886`*^9}, {3.8949278313010907`*^9, 3.894927856336387*^9}, {
+   3.8950117453660736`*^9, 3.89501179772704*^9}, {3.8950118386056347`*^9, 
+   3.895011852553372*^9}, {3.8950124181630926`*^9, 3.8950124209537992`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Todos", " ", "los", " ", "datos"}], "*)"}], "\[IndentingNewLine]",
+   "Gr\[AAcute]ficasT"}]], "Input",
+ CellChangeTimes->{{3.8765702911415052`*^9, 3.8765703013997097`*^9}, {
+   3.8765703538916163`*^9, 3.876570355250848*^9}, {3.8900646721069613`*^9, 
+   3.890064684501695*^9}, {3.890064805744673*^9, 3.8900648060066395`*^9}, 
+   3.8945096214963226`*^9, {3.8945098140161858`*^9, 3.8945098150785666`*^9}, {
+   3.894510222191598*^9, 3.8945102238635893`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    891., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$181927$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$181927$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, \
+$CellContext`VAllCUJAEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$], 
+          Part[$CellContext`Vmostw, $CellContext`A$$], 
+          Part[$CellContext`Vno, $CellContext`A$$], 
+          Part[$CellContext`Vnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Casa trabajo (artificiales)", "Encuesta", "Casa trabajo CUJAE", 
+          "Todos los viajes", "Viajes entre semana", 
+          "Viajes entre semana de estables", "Viajes en la ma\[NTilde]ana", 
+          "Viajes en la ma\[NTilde]ana entre semana de estables", 
+          "Viajes en la tarde", 
+          "Viajes en la tarde entre semana de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {237., 245.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmVkYGBQA+J7bBPm/Xj4xvHA/jVfQXTAX4Fdv4F01pH2uQt/vXEs
+mRd3EEQXaX2+B6LLdX9N2/r7jSOjr9wSEH2osHYXiP5jcI5hO5A+7c8kCqI3
+tV/WANHnbnxMANGZ09c8ePHnjeOL5rvyBixvHffs4lED0ccWcgWB6ElPn1y2
+B9JM79r+gOg5L28ZOADp0IiaSBCdk92XB6JXnXhbBqIvt2xdBqIfbbu1DkTz
+RuzbC6J376x9B6Kf3dvyGUT3NDb/ANF1cadZHEHmKsyqdgbSBlt+fgoE0l46
+U0SDgLQlg4/SHyB9M8feGUSvUz1krcoKdM9fMScQzdDaGAiiAXkun/8=
+  "]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", "CUJAE", "*)"}], "\[IndentingNewLine]", 
+  "Gr\[AAcute]ficasCUJAEND"}]], "Input",
+ CellChangeTimes->{{3.876570379628976*^9, 3.876570436027603*^9}, {
+   3.8765705296502743`*^9, 3.876570531808445*^9}, {3.8765710883564143`*^9, 
+   3.8765711036843853`*^9}, {3.8945098181098003`*^9, 3.8945098188910666`*^9}, 
+   3.8945101199927006`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    737., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$196675$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$196675$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, \
+$CellContext`VAllCUJAEF}, PlotRange -> All, PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Casa trabajo (artificiales)", "Encuesta", 
+          "Todos los viajes CUJAE"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{802., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.876570519681489*^9, 3.8765705377616777`*^9}, 
+   3.876570617555339*^9, 3.876571104465624*^9, 3.876576732735868*^9, 
+   3.8894999401425467`*^9, 3.890064590526156*^9, 3.890067473530139*^9, 
+   3.8906938993626413`*^9, 3.8945098963230953`*^9, 3.894541986434432*^9, 
+   3.894543081387776*^9, 3.894543292962102*^9, 3.8945444314194393`*^9, 
+   3.8945494755353856`*^9, 3.8945791400890217`*^9, 3.894927940157336*^9, 
+   3.895012019429428*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Datos", " ", "de", " ", "buena", " ", "verosimilitud"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Gr\[AAcute]ficasS", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.894510453048381*^9, 3.894510472786292*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    891., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$197650$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$197650$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Casa trabajo (artificiales)", "Encuesta", "Todos los viajes", 
+          "Viajes entre semana", "Viajes de estables entre semana", 
+          "Viajes en la ma\[NTilde]ana de estables entre semana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8945104736768093`*^9, 3.8945419897158003`*^9, 
+  3.894542785724673*^9, 3.894543086278466*^9, 3.8945432972460623`*^9, 
+  3.894543372028576*^9, 3.8945435167525034`*^9, 3.8945444347320147`*^9, 
+  3.8945494814417057`*^9, 3.894579145573538*^9, 3.894927943688735*^9, 
+  3.895012026237356*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con viajes estables en la ma\[NTilde]ana entre semana", \
+"Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}, {3.8945489543996696`*^9, 
+  3.894548965540105*^9}, {3.8945490343277264`*^9, 3.894549037423935*^9}},
+ Background->RGBColor[0.87, 0.94, 1]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mostw", ",", 
+         RowBox[{"Total", "[", 
+          RowBox[{"mostw", ",", 
+           RowBox[{"{", "2", "}"}]}], "]"}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+  3.8945426080871286`*^9, 3.8945426083215*^9}, {3.8945490217946997`*^9, 
+  3.894549050220782*^9}, {3.8949283252697783`*^9, 3.894928328421519*^9}, {
+  3.895012101365226*^9, 3.895012101979149*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"EncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VSurveyE", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+       RowBox[{"NewArtificialSurv", "[", 
+        RowBox[{"EncuestasPorZona", ",", "Model", ",", "15"}], "]"}], ",", 
+       "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.873683709733906*^9, 3.8736837144214272`*^9}, {
+   3.873683820081643*^9, 3.8736838228020144`*^9}, {3.8736852182679043`*^9, 
+   3.873685222721015*^9}, {3.8736852589302454`*^9, 3.873685265010343*^9}, {
+   3.873685360649269*^9, 3.8736853736180477`*^9}, {3.8736865158861437`*^9, 
+   3.873686516667264*^9}, 3.873689582710504*^9, {3.8736905414920716`*^9, 
+   3.873690543759578*^9}, {3.8746732505288725`*^9, 3.874673250935238*^9}, {
+   3.8950120947034245`*^9, 3.8950121343354163`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", "Encuesta", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"VEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"encuesta", ",", "EncuestasPorZona", ",", "Model"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "inestables"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFallt", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"allt", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modallt", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"allt", ",", "VxFallt"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vallt", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modallt", ",", "15"}], "]"}], ",",
+          "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFalltw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modalltw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltw", ",", "VxFalltw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Valltw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modalltw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFalltstw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modalltstw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"alltstw", ",", "VxFalltstw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Valltstw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modalltstw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFmo", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"mo", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modmo", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mo", ",", "VxFmo"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vmo", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modmo", ",", "15"}], "]"}], ",", 
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "inestable"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFno", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"no", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modno", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"no", ",", "VxFno"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vno", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modno", ",", "15"}], "]"}], ",", 
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFnostw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modnostw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"nostw", ",", "VxFnostw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vnostw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modnostw", ",", "15"}], "]"}], 
+         ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", "alltravelCUJAE", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ViajesPorFilaAllCUJAE", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltravelCUJAE", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VAllCUJAEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"alltravelCUJAE", ",", "ViajesPorFilaAllCUJAE", ",", "Model"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Casa", " ", "trabajo"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VxFhw", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"hw", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Modhw", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"hw", ",", "VxFhw"}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Vhw", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Verosimilitud", "[", 
+        RowBox[{
+         RowBox[{"NewArtificialSurv", "[", 
+          RowBox[{"EncuestasPorZona", ",", "Modhw", ",", "15"}], "]"}], ",", 
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "alltravelCUJAE", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ViajesPorFilaAllCUJAE", "=", 
+     RowBox[{"Total", "[", 
+      RowBox[{"alltravelCUJAE", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"VAllCUJAEF", "=", 
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{"alltravelCUJAE", ",", "ViajesPorFilaAllCUJAE", ",", "Model"}], 
+      "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.894549070427489*^9, 3.8945491145727134`*^9}, {
+   3.894928391491129*^9, 3.8949283986344805`*^9}, {3.894928429216791*^9, 
+   3.8949284323416414`*^9}, {3.8950121496758633`*^9, 
+   3.8950121743926525`*^9}, {3.8950123295265265`*^9, 3.8950123340314064`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasT", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", "VAllCUJAEF", 
+           ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vno", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vnostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Viajes estables en la ma\[NTilde]ana entre semana \
+(artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"", ",", 
+           "\"\<Casa trabajo CUJAE\>\"", ",", "\"\<Todos los viajes\>\"", " ",
+            ",", "\"\<Casa trabajo\>\"", ",", "\"\<Viajes entre semana\>\"", 
+           ",", "\"\<Viajes entre semana de estables\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", " ", 
+           "\"\<Viajes en la tarde\>\"", ",", " ", 
+           "\"\<Viajes en la tarde de estables\>\""}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasS", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Viajes estables en la ma\[NTilde]ana entre semana \
+(artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"", ",", 
+           "\"\<Todos los viajes\>\"", ",", "\"\<Casa trabajo\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\""}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Gr\[AAcute]ficasCUJAEND", "=", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"ListLogPlot", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "1"}], "*", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"VSurveyE", "[", 
+           RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", "VAllCUJAEF"}], 
+         "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", 
+          RowBox[{"-", 
+           RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+       RowBox[{"LabelStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Black", ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+         "]"}]}], ",", 
+       RowBox[{"PlotLegends", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Viajes estables en la ma\[NTilde]ana entre semana \
+(artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"", ",", " ", 
+          "\"\<Casa trabajo CUJAE\>\""}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945468936302977`*^9, 
+   3.8945469025071654`*^9}, {3.8945469326361446`*^9, 3.894546938854726*^9}, {
+   3.8945491886693015`*^9, 3.8945493315799828`*^9}, {3.8945495047558503`*^9, 
+   3.894549517976411*^9}, {3.894579315170698*^9, 3.8945793239049826`*^9}, {
+   3.894928448079629*^9, 3.8949284879579506`*^9}, {3.8950121862690945`*^9, 
+   3.8950122775254602`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Todos", " ", "los", " ", "datos"}], "*)"}], "\[IndentingNewLine]",
+   "Gr\[AAcute]ficasT"}]], "Input",
+ CellChangeTimes->{{3.8765702911415052`*^9, 3.8765703013997097`*^9}, {
+   3.8765703538916163`*^9, 3.876570355250848*^9}, {3.8900646721069613`*^9, 
+   3.890064684501695*^9}, {3.890064805744673*^9, 3.8900648060066395`*^9}, 
+   3.8945096214963226`*^9, {3.8945098140161858`*^9, 3.8945098150785666`*^9}, {
+   3.894510222191598*^9, 3.8945102238635893`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    959., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$254344$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$254344$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, \
+$CellContext`VAllCUJAEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$], 
+          Part[$CellContext`Vno, $CellContext`A$$], 
+          Part[$CellContext`Vnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Viajes estables en la ma\[NTilde]ana entre semana (artificiales)", 
+          "Encuesta", "Casa trabajo CUJAE", "Todos los viajes", 
+          "Casa trabajo", "Viajes entre semana", 
+          "Viajes entre semana de estables", "Viajes en la ma\[NTilde]ana", 
+          "Viajes en la tarde", "Viajes en la tarde de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1024., {237., 245.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.894547017756797*^9, 3.8945493352987614`*^9, 3.8945495248366237`*^9, {
+   3.894564745541891*^9, 3.894564747588604*^9}, 3.894579188218299*^9, 
+   3.894579249383387*^9, 3.8945793280300283`*^9, 3.8949284922881775`*^9, 
+   3.895012281375801*^9, 3.895012348834798*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", "CUJAE", "*)"}], "\[IndentingNewLine]", 
+  "Gr\[AAcute]ficasCUJAEND"}]], "Input",
+ CellChangeTimes->{{3.876570379628976*^9, 3.876570436027603*^9}, {
+   3.8765705296502743`*^9, 3.876570531808445*^9}, {3.8765710883564143`*^9, 
+   3.8765711036843853`*^9}, {3.8945098181098003`*^9, 3.8945098188910666`*^9}, 
+   3.8945101199927006`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    959., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$258385$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$258385$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, \
+$CellContext`VAllCUJAEF}, PlotRange -> All, PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Viajes estables en la ma\[NTilde]ana entre semana (artificiales)", 
+          "Encuesta", "Casa trabajo CUJAE"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1024., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.876570519681489*^9, 3.8765705377616777`*^9}, 
+   3.876570617555339*^9, 3.876571104465624*^9, 3.876576732735868*^9, 
+   3.8894999401425467`*^9, 3.890064590526156*^9, 3.890067473530139*^9, 
+   3.8906938993626413`*^9, 3.8945098963230953`*^9, 3.894541986434432*^9, 
+   3.894542667298046*^9, 3.894543021789438*^9, 3.894579261977228*^9, 
+   3.894928528105359*^9, 3.8950123749195824`*^9}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Datos", " ", "de", " ", "buena", " ", "verosimilitud"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Gr\[AAcute]ficasS", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.894510453048381*^9, 3.894510472786292*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    959., {160., 168.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$259331$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$259331$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Viajes estables en la ma\[NTilde]ana entre semana (artificiales)", 
+          "Encuesta", "Todos los viajes", "Casa trabajo", 
+          "Viajes entre semana", "Viajes en la ma\[NTilde]ana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1024., {219., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8945104736768093`*^9, 3.8945419897158003`*^9, 
+  3.894542673829667*^9, 3.894543024148923*^9, 3.894579273541845*^9, 
+  3.894928530761695*^9, 3.8950123801376715`*^9}]
+}, Closed]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8949285678887873`*^9, 3.894928568326171*^9}, 
+   3.8949287152864532`*^9}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.894928139353176*^9, 3.8949281396188016`*^9}, {
+   3.8949281781720066`*^9, 3.8949281792032313`*^9}, 3.894928565998015*^9}]
+}, Closed]]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Comparaci\[OAcute]n por torres.", "Title",
+ CellChangeTimes->{{3.894928858904978*^9, 3.894928887906409*^9}, {
+   3.8949311369819403`*^9, 3.894931150655424*^9}, 3.8950126791972437`*^9},
+ FontSize->72,
+ Background->RGBColor[1, 0.85, 0.85]],
+
+Cell[CellGroupData[{
+
+Cell["Matrices ", "Chapter",
+ CellChangeTimes->{{3.894507690606474*^9, 3.8945077773019223`*^9}, 
+   3.894541784573419*^9, {3.89492913764612*^9, 3.8949291454446144`*^9}, {
+   3.8949309667230625`*^9, 3.8949310023065324`*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"encuesta", "=", 
+     RowBox[{
+      RowBox[{"Import", "[", 
+       RowBox[{"\"\<encuesta_Integer.dat\>\"", ",", 
+        RowBox[{"Path", "\[Rule]", "\"\<Encuesta\>\""}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{
+        RowBox[{";;", "134"}], ",", ";;"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"hw", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_hw_st_week.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"allt", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_allt_unst_all.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"alltw", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_allt_unst_week.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"alltstw", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_allt_st_week.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mo", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_mo_unst_all.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mostw", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_mo_st_week.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"no", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_no_unst_all.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nostw", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"\"\<ZMeanm_no_st_week.csv\>\"", ",", 
+       RowBox[{"Path", "\[Rule]", " ", "\"\<Saves\>\""}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{
+  3.87634126594221*^9, {3.890064150749963*^9, 3.8900642717607236`*^9}, {
+   3.8900643783370185`*^9, 3.890064382806677*^9}, {3.890064431493367*^9, 
+   3.890064431818321*^9}, {3.8900670020474935`*^9, 3.890067124050756*^9}, 
+   3.890068453637577*^9, 3.890071841089015*^9, {3.8900799200662117`*^9, 
+   3.890079988669649*^9}, {3.8900802520441*^9, 3.890080286476801*^9}, {
+   3.8900804603950777`*^9, 3.8900804858202114`*^9}, {3.8900805956964517`*^9, 
+   3.8900806074061513`*^9}, {3.890693607756599*^9, 3.8906936105864544`*^9}, 
+   3.890693958976104*^9, {3.890697869386347*^9, 3.8906979664046507`*^9}, {
+   3.8906988522369432`*^9, 3.890698854377507*^9}, {3.890698901279066*^9, 
+   3.890698909046831*^9}, {3.8907003978574705`*^9, 3.890700443113073*^9}, {
+   3.8907028885903225`*^9, 3.8907029039973726`*^9}, {3.894506567574443*^9, 
+   3.8945065730605245`*^9}, {3.894506609205748*^9, 3.8945066096121297`*^9}, {
+   3.8945067041414795`*^9, 3.8945067121808944`*^9}, {3.8945068551385093`*^9, 
+   3.8945068944465275`*^9}, {3.8945069632903924`*^9, 
+   3.8945070674630675`*^9}, {3.894507173723909*^9, 3.894507247032667*^9}, 
+   3.8945074852106504`*^9, {3.8945084260968647`*^9, 3.89450842831565*^9}, {
+   3.8945088054399176`*^9, 3.894508832425275*^9}, {3.8945088647251434`*^9, 
+   3.8945089006991234`*^9}, {3.8945089316542253`*^9, 
+   3.8945089654091983`*^9}, {3.8945424242436466`*^9, 3.894542424884286*^9}, 
+   3.8945424786109285`*^9, {3.8945429600618587`*^9, 3.8945429654835787`*^9}, {
+   3.894543489746481*^9, 3.8945434899496174`*^9}, {3.8945435621642113`*^9, 
+   3.8945435855898137`*^9}, {3.8945436271369996`*^9, 3.894543639013747*^9}, {
+   3.894543701300816*^9, 3.8945437045665264`*^9}, {3.894544256069642*^9, 
+   3.8945442605559173`*^9}, {3.894544294621132*^9, 3.8945442997638407`*^9}, {
+   3.894544343314555*^9, 3.8945443451427593`*^9}, {3.89456363546903*^9, 
+   3.8945636741917095`*^9}, {3.894578613319023*^9, 3.894578665090489*^9}, {
+   3.8945787350179443`*^9, 3.8945787437052603`*^9}, 3.894929153100806*^9, {
+   3.8949309869748297`*^9, 3.8949309889298525`*^9}, {3.895010944724296*^9, 
+   3.8950109530816326`*^9}, {3.895011345399786*^9, 3.8950113570232315`*^9}, {
+   3.895012732000676*^9, 3.8950127458075824`*^9}, {3.895013157991503*^9, 
+   3.895013220042497*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Para comprobaciones de linealidad", "Chapter",
+ CellChangeTimes->{{3.8949285844686427`*^9, 3.8949286095498047`*^9}, 
+   3.89492868284282*^9, {3.8949287489467974`*^9, 3.894928764510562*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"VEF", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"VSurveyE", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Gray", ",", 
+       RowBox[{"PointSize", "[", "Medium", "]"}]}], "}"}]}], ",", " ", 
+    RowBox[{"AxesLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LiArtificial", "[", "n", "]"}], ",", 
+       RowBox[{"LiE", "[", "n", "]"}]}], "}"}]}], ",", 
+    RowBox[{"PlotLegends", "\[Rule]", 
+     RowBox[{
+     "{", "\"\<Encuesta Vs Todos los viajes (artificiales/ND)\>\"", "}"}]}]}],
+    "]"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"VAllCUJAEF", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"VSurveyE", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], "]"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", " ", 
+    RowBox[{"AxesLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"LiArtificial", "[", "n", "]"}], ",", 
+       RowBox[{"LCUJAE", "[", "n", "]"}]}], "}"}]}], ",", 
+    RowBox[{"PlotLegends", "\[Rule]", 
+     RowBox[{
+     "{", "\"\<Todos los viajes CUJAE Todos los viajes CUJAETodos los viajes \
+(artificiales/ND)\>\"", "}"}]}], ",", 
+    RowBox[{"PlotStyle", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"Gray", ",", 
+       RowBox[{"PointSize", "[", "Medium", "]"}]}], "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fluxes", "[", "mat_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Total", "[", "mat", "]"}], "-", 
+    RowBox[{"Total", "[", 
+     RowBox[{"Transpose", "[", "mat", "]"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Total", "[", 
+  RowBox[{"Total", "[", "alltravel", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Fluxes", "[", "alltravel", "]"}], ",", 
+      RowBox[{"Fluxes", "[", 
+       RowBox[{"89.6523", "*", "encuesta"}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Fluxes", "[", "alltravel", "]"}], ",", 
+      RowBox[{"Fluxes", "[", "alltravel69", "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "4000"}], ",", "4000"}], "}"}]}], "}"}]}], ",", 
+   RowBox[{"AspectRatio", "\[Rule]", "1"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Fluxes", "[", "homework", "]"}], ",", 
+     RowBox[{"Fluxes", "[", "alltravel69", "]"}]}], "}"}], "]"}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8949287081122713`*^9, 3.8949287222396283`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con todos los viajes", "Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}},
+ Background->RGBColor[1, 0.9, 0.8]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"allt", ",", 
+         RowBox[{
+          RowBox[{"Total", "[", 
+           RowBox[{"allt", ",", 
+            RowBox[{"{", "2", "}"}]}], "]"}], "/.", " ", 
+          RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+   3.8945426080871286`*^9, 3.8945426083215*^9}, {3.8949252720319653`*^9, 
+   3.894925294631999*^9}, {3.894925330557311*^9, 3.894925341182129*^9}, 
+   3.894925417926422*^9, {3.89492544971085*^9, 3.89492545099218*^9}, {
+   3.895013318943989*^9, 3.895013342536027*^9}, {3.8950150961148567`*^9, 
+   3.895015114248051*^9}, {3.8950151978949413`*^9, 3.895015199391798*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"EncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VSurveyE", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Model", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", "Encuesta", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VEF", "=", 
+    RowBox[{"Verosimilitud", "[", 
+     RowBox[{"encuesta", ",", "EncuestasPorZona", ",", "Model"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Casa", " ", "trabajo"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFhw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"hw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modhw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"hw", ",", 
+       RowBox[{"VxFhw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vhw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modhw", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"VxFalltw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltstw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltstw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltstw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"VxFalltstw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltstw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltstw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFmo", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"mo", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modmo", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"mo", ",", 
+       RowBox[{"VxFmo", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vmo", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modmo", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Ma\[NTilde]ana", " ", "estable", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VxFmostw", "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"mostw", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modmostw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"mostw", ",", 
+       RowBox[{"VxFmostw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vmostw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modmostw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "inestable"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFno", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"no", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modno", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"no", ",", 
+       RowBox[{"VxFno", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vno", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modno", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VxFnostw", "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"nostw", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modnostw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"VxFnostw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vnostw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modnostw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.8949251927256117`*^9, 3.8949251973994565`*^9}, {
+   3.894925495400375*^9, 3.894925525468563*^9}, 3.894925584711213*^9, {
+   3.894925623181727*^9, 3.894926021087392*^9}, {3.894931282907134*^9, 
+   3.8949313199573355`*^9}, {3.8950111942261744`*^9, 3.895011197057884*^9}, {
+   3.8950114036802287`*^9, 3.8950114683069997`*^9}, {3.895011705295109*^9, 
+   3.895011708662566*^9}, {3.89501423429521*^9, 3.895014246022966*^9}, {
+   3.8950152219314814`*^9, 3.895015225254073*^9}, {3.895015278901346*^9, 
+   3.895015323900772*^9}, {3.8950154432552056`*^9, 3.895015478520425*^9}, {
+   3.895015542248846*^9, 3.895015571815623*^9}, {3.895015738348454*^9, 
+   3.895015739678032*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasT", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vno", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vnostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Todos los viajes (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", " ", "\"\<Casa trabajo\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes entre semana de estables\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana entre semana de estables\>\"", 
+           ",", "\"\<Viajes en la tarde\>\"", ",", 
+           "\"\<Viajes en la tarde entre semana de estables\>\""}], "}"}]}]}],
+        "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasS", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Todos los viajes (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", " ", "\"\<Casa trabajo\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\""}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945468936302977`*^9, 
+   3.8945469025071654`*^9}, {3.8945469326361446`*^9, 3.894546938854726*^9}, {
+   3.8945493770682154`*^9, 3.8945493977417593`*^9}, {3.894579387943058*^9, 
+   3.8945793951462345`*^9}, {3.894926081658774*^9, 3.894926134227215*^9}, {
+   3.8949261779170847`*^9, 3.894926231525837*^9}, {3.8949263693368177`*^9, 
+   3.894926370305573*^9}, {3.894926744280219*^9, 3.894926749532388*^9}, {
+   3.894927055809521*^9, 3.8949270735749426`*^9}, {3.895011489389861*^9, 
+   3.8950115569483995`*^9}, {3.895012448672844*^9, 3.8950124504283857`*^9}, {
+   3.895015611198595*^9, 3.895015615299728*^9}, 3.8950156504024267`*^9, {
+   3.8950175307928824`*^9, 3.8950175493357096`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Todos", " ", "los", " ", "datos"}], "*)"}], "\[IndentingNewLine]",
+   "Gr\[AAcute]ficasT"}]], "Input",
+ CellChangeTimes->{{3.8765702911415052`*^9, 3.8765703013997097`*^9}, {
+   3.8765703538916163`*^9, 3.876570355250848*^9}, {3.8900646721069613`*^9, 
+   3.890064684501695*^9}, {3.890064805744673*^9, 3.8900648060066395`*^9}, 
+   3.8945096214963226`*^9, {3.8945098140161858`*^9, 3.8945098150785666`*^9}, {
+   3.894510222191598*^9, 3.8945102238635893`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 20, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    891., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2713763$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2713763$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$], 
+          Part[$CellContext`Vmostw, $CellContext`A$$], 
+          Part[$CellContext`Vno, $CellContext`A$$], 
+          Part[$CellContext`Vnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Todos los viajes (artificiales)", "Encuesta", "Casa trabajo", 
+          "Viajes entre semana", "Viajes entre semana de estables", 
+          "Viajes en la ma\[NTilde]ana", 
+          "Viajes en la ma\[NTilde]ana entre semana de estables", 
+          "Viajes en la tarde", 
+          "Viajes en la tarde entre semana de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {242., 250.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.894547017756797*^9, 3.8945788101482077`*^9, 3.894578918512963*^9, 
+   3.8945793992556367`*^9, 3.8949261442429695`*^9, 3.8949262363070993`*^9, 
+   3.8949263761977315`*^9, 3.8949267527668085`*^9, 3.894927078904755*^9, {
+   3.8949303302602034`*^9, 3.8949303321821656`*^9}, 3.89501099250004*^9, 
+   3.895011162139567*^9, 3.895011208077547*^9, 3.8950115726931524`*^9, {
+   3.895015590669923*^9, 3.895015619850171*^9}, 3.8950164028475723`*^9, 
+   3.89501755435524*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Datos", " ", "de", " ", "buena", " ", "verosimilitud"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Gr\[AAcute]ficasS", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.894510453048381*^9, 3.894510472786292*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 48, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    760., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2721913$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2721913$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Todos los viajes (artificiales)", "Encuesta", "Casa trabajo", 
+          "Viajes entre semana", "Viajes en la ma\[NTilde]ana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{825., {242., 250.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8945104736768093`*^9, 3.8945419897158003`*^9, 
+  3.894542673829667*^9, 3.894543024148923*^9, 3.894578981872414*^9, 
+  3.8949271355996675`*^9, 3.8950116366077633`*^9, 3.895015671536355*^9, 
+  3.8950165172767944`*^9, 3.8950173965574355`*^9, 3.8950175873491364`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<Allt(xZone).swf\>\"", ",", "%"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8950165248945293`*^9, 3.8950165858663607`*^9}, {
+  3.895016940376484*^9, 3.895016962886487*^9}, {3.895017167494562*^9, 
+  3.8950171743036647`*^9}, {3.89501737966428*^9, 3.895017389793264*^9}}],
+
+Cell[BoxData["\<\"Allt(xZone).swf\"\>"], "Output",
+ CellChangeTimes->{
+  3.8950166678490286`*^9, {3.8950169459770575`*^9, 3.8950169514433565`*^9}, {
+   3.8950171294250717`*^9, 3.895017135313362*^9}, {3.8950171699952803`*^9, 
+   3.8950171748413134`*^9}, 3.8950173905616646`*^9, 3.89501747787027*^9, 
+   3.8950177061756144`*^9}]
+}, Open  ]]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con casa trabajo", "Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}, {3.894542050081151*^9, 
+  3.894542056348421*^9}},
+ Background->RGBColor[0.88, 1, 0.88]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"hw", ",", 
+         RowBox[{
+          RowBox[{"Total", "[", 
+           RowBox[{"hw", ",", 
+            RowBox[{"{", "2", "}"}]}], "]"}], "/.", " ", 
+          RowBox[{"0.", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+  3.8945420925232563`*^9, 3.894542111353013*^9}, {3.894543873182751*^9, 
+  3.894543895716219*^9}, {3.894543963820756*^9, 3.894543978211348*^9}, {
+  3.894927330103628*^9, 3.8949273417774153`*^9}, {3.894927372779176*^9, 
+  3.894927375544587*^9}, {3.895015771481065*^9, 3.8950157827668085`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"EncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VSurveyE", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Model", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", "Encuesta", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VEF", "=", 
+    RowBox[{"Verosimilitud", "[", 
+     RowBox[{"encuesta", ",", "EncuestasPorZona", ",", "Model"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "inestables"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFallt", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"allt", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modallt", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"allt", ",", 
+       RowBox[{"VxFallt", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vallt", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modallt", ",", "134"}], "]"}], ",",
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"VxFalltw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltstw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltstw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltstw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"VxFalltstw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltstw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltstw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFmo", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"mo", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modmo", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"mo", ",", 
+       RowBox[{"VxFmo", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vmo", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modmo", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Ma\[NTilde]ana", " ", "estable", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VxFmostw", "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"mostw", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modmostw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"mostw", ",", 
+       RowBox[{"VxFmostw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vmostw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modmostw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "inestable"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFno", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"no", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modno", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"no", ",", 
+       RowBox[{"VxFno", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vno", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modno", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VxFnostw", "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"nostw", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modnostw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"VxFnostw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Vnostw", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+       RowBox[{"NewArtificialSurv", "[", 
+        RowBox[{"EncuestasPorZona", ",", "Modnostw", ",", "134"}], "]"}], ",",
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.894542191364087*^9, 3.894542234680005*^9}, {
+   3.894543913157447*^9, 3.8945439476921234`*^9}, {3.8945439971840715`*^9, 
+   3.8945441450274105`*^9}, {3.894544200282346*^9, 3.8945442025791636`*^9}, {
+   3.8949273989701605`*^9, 3.8949274128154936`*^9}, {3.894927454774747*^9, 
+   3.894927503858053*^9}, 3.895011726612419*^9, {3.8950119094408264`*^9, 
+   3.8950119513185644`*^9}, {3.895015795529041*^9, 3.895015847864808*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}, {3.8945443970248394`*^9, 
+   3.8945443990560713`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasT", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vno", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vnostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Casa trabajo (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", " ", "\"\<Todos los viajes\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes entre semana de estables\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana entre semana de estables\>\"", 
+           ",", "\"\<Viajes en la tarde\>\"", ",", 
+           "\"\<Viajes en la tarde entre semana de estables\>\""}], " ", 
+          "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasS", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Casa trabajo (artificiales)\>\"", "  ", ",", 
+           "\"\<Encuesta\>\"", ",", " ", "\"\<Todos los viajes\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes de estables entre semana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana de estables entre semana\>\""}], 
+          "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945422556175666`*^9, 
+   3.8945422904793534`*^9}, {3.8945427598463125`*^9, 
+   3.8945427765370717`*^9}, {3.8945433289752007`*^9, 
+   3.8945433612290907`*^9}, {3.894544173060465*^9, 3.894544237864303*^9}, {
+   3.894547327246787*^9, 3.8945473471857634`*^9}, {3.894549152453555*^9, 
+   3.8945491617176957`*^9}, {3.894549441777193*^9, 3.8945494641601524`*^9}, {
+   3.8945793568456373`*^9, 3.8945793649879045`*^9}, {3.8949275244677477`*^9, 
+   3.8949276231544886`*^9}, {3.8949278313010907`*^9, 3.894927856336387*^9}, {
+   3.8950117453660736`*^9, 3.89501179772704*^9}, {3.8950118386056347`*^9, 
+   3.895011852553372*^9}, {3.8950124181630926`*^9, 3.8950124209537992`*^9}, {
+   3.895015880906679*^9, 3.8950158934348526`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Todos", " ", "los", " ", "datos"}], "*)"}], "\[IndentingNewLine]",
+   "Gr\[AAcute]ficasT"}]], "Input",
+ CellChangeTimes->{{3.8765702911415052`*^9, 3.8765703013997097`*^9}, {
+   3.8765703538916163`*^9, 3.876570355250848*^9}, {3.8900646721069613`*^9, 
+   3.890064684501695*^9}, {3.890064805744673*^9, 3.8900648060066395`*^9}, 
+   3.8945096214963226`*^9, {3.8945098140161858`*^9, 3.8945098150785666`*^9}, {
+   3.894510222191598*^9, 3.8945102238635893`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    891., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2377316$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2377316$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$], 
+          Part[$CellContext`Vmostw, $CellContext`A$$], 
+          Part[$CellContext`Vno, $CellContext`A$$], 
+          Part[$CellContext`Vnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Casa trabajo (artificiales)", "Encuesta", "Todos los viajes", 
+          "Viajes entre semana", "Viajes entre semana de estables", 
+          "Viajes en la ma\[NTilde]ana", 
+          "Viajes en la ma\[NTilde]ana entre semana de estables", 
+          "Viajes en la tarde", 
+          "Viajes en la tarde entre semana de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {242., 250.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmVkYGBQB+J7bBPm/Xj4xvHA/jVfQXTAX4Fdv4F01pH2uQt/vXEs
+mRd3EEQXaX2+B6LLdX9N2/r7jSOjr9wSEH2osHYXiP5jcI5hO5A+7c8kCqI3
+tV/WANHnbnxMANGZ09c8ePHnjeOL5rvyBixvHffs4lED0ccWcgWB6ElPn1y2
+B9JM79r+gOg5L28ZOADp0IiaSBCdk92XB6JXnXhbBqIvt2xdBqIfbbu1DkTz
+RuzbC6J376x9B6Kf3dvyGUT3NDb/ANF1cadZHEHmKsyqdgbSBlt+fgoE0l46
+U0SDgLQlg4/SHyB9M8feGUSvUz1krcoKdM9fMScQzdDaGAii+8222qkDaQCI
+2aMS
+  "]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Datos", " ", "de", " ", "buena", " ", "verosimilitud"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Gr\[AAcute]ficasS", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.894510453048381*^9, 3.894510472786292*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 8, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    891., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2380608$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2380608$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Casa trabajo (artificiales)", "Encuesta", "Todos los viajes", 
+          "Viajes entre semana", "Viajes de estables entre semana", 
+          "Viajes en la ma\[NTilde]ana de estables entre semana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{956., {242., 250.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8945104736768093`*^9, 3.8945419897158003`*^9, 
+  3.894542785724673*^9, 3.894543086278466*^9, 3.8945432972460623`*^9, 
+  3.894543372028576*^9, 3.8945435167525034`*^9, 3.8945444347320147`*^9, 
+  3.8945494814417057`*^9, 3.894579145573538*^9, 3.894927943688735*^9, 
+  3.895012026237356*^9, 3.895015945676066*^9}]
+}, Open  ]]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Modelado con viajes estables en la ma\[NTilde]ana entre semana", \
+"Chapter",
+ CellChangeTimes->{{3.894507823590064*^9, 3.894507866405898*^9}, {
+  3.8945079416071324`*^9, 3.8945079424976892`*^9}, {3.8945489543996696`*^9, 
+  3.894548965540105*^9}, {3.8945490343277264`*^9, 3.894549037423935*^9}},
+ Background->RGBColor[0.87, 0.94, 1]],
+
+Cell[CellGroupData[{
+
+Cell["Creaci\[OAcute]n de modelo y c\[AAcute]lculo de la verosimilitud", \
+"Subchapter",
+ CellChangeTimes->{{3.8945083257258863`*^9, 3.8945083374474325`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "=", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{"Divide", ",", 
+       RowBox[{"{", 
+        RowBox[{"mostw", ",", 
+         RowBox[{
+          RowBox[{"Total", "[", 
+           RowBox[{"mostw", ",", 
+            RowBox[{"{", "2", "}"}]}], "]"}], "/.", " ", 
+          RowBox[{"0.", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.8945083521662607`*^9, 3.894508355119364*^9}, {
+  3.8945426080871286`*^9, 3.8945426083215*^9}, {3.8945490217946997`*^9, 
+  3.894549050220782*^9}, {3.8949283252697783`*^9, 3.894928328421519*^9}, {
+  3.895012101365226*^9, 3.895012101979149*^9}, {3.895015987728942*^9, 
+  3.895015993381071*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"EncuestasPorZona", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"encuesta", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VSurveyE", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Model", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "100"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", "Encuesta", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VEF", "=", 
+    RowBox[{"Verosimilitud", "[", 
+     RowBox[{"encuesta", ",", "EncuestasPorZona", ",", "Model"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "inestables"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFallt", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"allt", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modallt", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"allt", ",", 
+       RowBox[{"VxFallt", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vallt", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modallt", ",", "134"}], "]"}], ",",
+         "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "inestables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltw", ",", 
+       RowBox[{"VxFalltw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Allt", " ", "estables", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFalltstw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"alltstw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modalltstw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"alltstw", ",", 
+       RowBox[{"VxFalltstw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Valltstw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modalltstw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Ma\[NTilde]ana", " ", "inestable"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFmo", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"mo", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modmo", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"mo", ",", 
+       RowBox[{"VxFmo", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vmo", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modmo", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "inestable"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFno", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"no", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modno", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"no", ",", 
+       RowBox[{"VxFno", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vno", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modno", ",", "134"}], "]"}], ",", 
+        "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Tarde", " ", "estable", " ", "entre", " ", "semana"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VxFnostw", "=", 
+    RowBox[{"Total", "[", 
+     RowBox[{"nostw", ",", 
+      RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modnostw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"nostw", ",", 
+       RowBox[{"VxFnostw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Vnostw", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"Verosimilitud", "[", 
+       RowBox[{
+        RowBox[{"NewArtificialSurv", "[", 
+         RowBox[{"EncuestasPorZona", ",", "Modnostw", ",", "134"}], "]"}], 
+        ",", "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Casa", " ", "trabajo"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VxFhw", "=", 
+   RowBox[{"Total", "[", 
+    RowBox[{"hw", ",", 
+     RowBox[{"{", "2", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Modhw", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"Divide", ",", 
+     RowBox[{"{", 
+      RowBox[{"hw", ",", 
+       RowBox[{"VxFhw", "/.", " ", 
+        RowBox[{"0.", " ", "\[Rule]", "1"}]}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Vhw", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Verosimilitud", "[", 
+      RowBox[{
+       RowBox[{"NewArtificialSurv", "[", 
+        RowBox[{"EncuestasPorZona", ",", "Modhw", ",", "134"}], "]"}], ",", 
+       "EncuestasPorZona", ",", "Model"}], "]"}], ",", "50"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.8736822855251355`*^9, 3.873682291089546*^9}, {
+   3.873683585669891*^9, 3.8736836563732557`*^9}, {3.873689634044362*^9, 
+   3.87368964455976*^9}, {3.8765691326273456`*^9, 3.876569295160838*^9}, {
+   3.8765693277263117`*^9, 3.876569453104932*^9}, {3.876570010562024*^9, 
+   3.876570011499566*^9}, {3.876570843668816*^9, 3.876570858543998*^9}, 
+   3.8894978745502777`*^9, {3.8900683008240147`*^9, 3.8900683982882676`*^9}, {
+   3.894508395906446*^9, 3.8945084025169907`*^9}, {3.894508447583459*^9, 
+   3.8945087055453434`*^9}, {3.8945089848797073`*^9, 3.894509035372867*^9}, {
+   3.8945090676260552`*^9, 3.89450931543857*^9}, {3.8945093589456344`*^9, 
+   3.894509360289217*^9}, {3.894549070427489*^9, 3.8945491145727134`*^9}, {
+   3.894928391491129*^9, 3.8949283986344805`*^9}, {3.894928429216791*^9, 
+   3.8949284323416414`*^9}, {3.8950121496758633`*^9, 
+   3.8950121743926525`*^9}, {3.8950123295265265`*^9, 3.8950123340314064`*^9}, 
+   3.895016016901289*^9, {3.895016059110972*^9, 3.895016104687114*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Ploteo", "Subchapter",
+ CellChangeTimes->{
+  3.8945095465484695`*^9, {3.894509576694027*^9, 3.8945095851017017`*^9}, {
+   3.8945420299854164`*^9, 3.8945420367977915`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasT", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltstw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vno", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vnostw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Viajes estables en la ma\[NTilde]ana entre semana \
+(artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"", ",", 
+           "\"\<Todos los viajes\>\"", " ", ",", "\"\<Casa trabajo\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes entre semana de estables\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\"", ",", " ", 
+           "\"\<Viajes en la tarde\>\"", ",", " ", 
+           "\"\<Viajes en la tarde de estables\>\""}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gr\[AAcute]ficasS", "=", 
+    RowBox[{"Manipulate", "[", 
+     RowBox[{
+      RowBox[{"ListLogPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "1"}], "*", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"VSurveyE", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", "VEF", ",", 
+           RowBox[{"Vallt", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vhw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Valltw", "[", 
+            RowBox[{"[", "A", "]"}], "]"}], ",", 
+           RowBox[{"Vmo", "[", 
+            RowBox[{"[", "A", "]"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"PointSize", "[", "Medium", "]"}]}], ",", " ", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", 
+           RowBox[{"-", 
+            RowBox[{"Li", "[", "n", "]"}]}]}], "}"}]}], ",", 
+        RowBox[{"LabelStyle", "\[Rule]", 
+         RowBox[{"Directive", "[", 
+          RowBox[{"Black", ",", 
+           RowBox[{"FontFamily", "\[Rule]", "\"\<Arial\>\""}], ",", "12"}], 
+          "]"}]}], ",", 
+        RowBox[{"PlotLegends", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Viajes estables en la ma\[NTilde]ana entre semana \
+(artificiales)\>\"", "  ", ",", "\"\<Encuesta\>\"", ",", 
+           "\"\<Todos los viajes\>\"", ",", "\"\<Casa trabajo\>\"", ",", 
+           "\"\<Viajes entre semana\>\"", ",", 
+           "\"\<Viajes en la ma\[NTilde]ana\>\""}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"A", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.873683697982233*^9, 3.8736837013103*^9}, 
+   3.8736896551863775`*^9, 3.873689691487851*^9, {3.8736897442445726`*^9, 
+   3.8736897792014823`*^9}, {3.8736898327243958`*^9, 3.873690036163804*^9}, {
+   3.873690549509736*^9, 3.8736905498378625`*^9}, 3.87369059597176*^9, {
+   3.87369096362113*^9, 3.8736909728260045`*^9}, {3.873694155993457*^9, 
+   3.873694157838767*^9}, {3.8738086043239613`*^9, 3.873808608530823*^9}, 
+   3.874674692708076*^9, {3.8765690011590805`*^9, 3.8765690058777337`*^9}, {
+   3.876569522856931*^9, 3.876569642450619*^9}, {3.8765700761006203`*^9, 
+   3.876570247796197*^9}, 3.876570572327614*^9, {3.876570892424839*^9, 
+   3.8765710392559967`*^9}, {3.8900647261548223`*^9, 3.890064764402392*^9}, {
+   3.890064832285993*^9, 3.8900648975929174`*^9}, {3.89450936663303*^9, 
+   3.894509533015339*^9}, {3.8945096982557697`*^9, 3.8945097212608185`*^9}, {
+   3.8945097697051315`*^9, 3.89450980809229*^9}, {3.8945102172211943`*^9, 
+   3.8945102183305798`*^9}, {3.894510251755725*^9, 3.894510261554475*^9}, {
+   3.8945103390812263`*^9, 3.894510425968335*^9}, {3.8945468936302977`*^9, 
+   3.8945469025071654`*^9}, {3.8945469326361446`*^9, 3.894546938854726*^9}, {
+   3.8945491886693015`*^9, 3.8945493315799828`*^9}, {3.8945495047558503`*^9, 
+   3.894549517976411*^9}, {3.894579315170698*^9, 3.8945793239049826`*^9}, {
+   3.894928448079629*^9, 3.8949284879579506`*^9}, {3.8950121862690945`*^9, 
+   3.8950122775254602`*^9}, {3.8950161137138767`*^9, 3.8950161243785768`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Todos", " ", "los", " ", "datos"}], "*)"}], "\[IndentingNewLine]",
+   "Gr\[AAcute]ficasT"}]], "Input",
+ CellChangeTimes->{{3.8765702911415052`*^9, 3.8765703013997097`*^9}, {
+   3.8765703538916163`*^9, 3.876570355250848*^9}, {3.8900646721069613`*^9, 
+   3.890064684501695*^9}, {3.890064805744673*^9, 3.8900648060066395`*^9}, 
+   3.8945096214963226`*^9, {3.8945098140161858`*^9, 3.8945098150785666`*^9}, {
+   3.894510222191598*^9, 3.8945102238635893`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    959., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2509543$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2509543$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Valltstw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$], 
+          Part[$CellContext`Vno, $CellContext`A$$], 
+          Part[$CellContext`Vnostw, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Viajes estables en la ma\[NTilde]ana entre semana (artificiales)", 
+          "Encuesta", "Todos los viajes", "Casa trabajo", 
+          "Viajes entre semana", "Viajes entre semana de estables", 
+          "Viajes en la ma\[NTilde]ana", "Viajes en la tarde", 
+          "Viajes en la tarde de estables"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1024., {224., 232.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.894547017756797*^9, 3.8945493352987614`*^9, 3.8945495248366237`*^9, {
+   3.894564745541891*^9, 3.894564747588604*^9}, 3.894579188218299*^9, 
+   3.894579249383387*^9, 3.8945793280300283`*^9, 3.8949284922881775`*^9, 
+   3.895012281375801*^9, 3.895012348834798*^9, 3.8950162177999125`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Datos", " ", "de", " ", "buena", " ", "verosimilitud"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"Gr\[AAcute]ficasS", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.894510453048381*^9, 3.894510472786292*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`A$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"sin t\[IAcute]tulo\"", Typeset`specs$$ = {{
+      Hold[$CellContext`A$$], 1, 50, 1}}, Typeset`size$$ = {
+    959., {165., 172.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`A$2509956$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`A$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`A$$, $CellContext`A$2509956$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListLogPlot[-{
+          Part[$CellContext`VSurveyE, $CellContext`A$$], $CellContext`VEF, 
+          Part[$CellContext`Vallt, $CellContext`A$$], 
+          Part[$CellContext`Vhw, $CellContext`A$$], 
+          Part[$CellContext`Valltw, $CellContext`A$$], 
+          Part[$CellContext`Vmo, $CellContext`A$$]}, PlotRange -> All, 
+        PlotStyle -> PointSize[Medium], 
+        AxesLabel -> {$CellContext`n, -$CellContext`Li[$CellContext`n]}, 
+        LabelStyle -> Directive[Black, FontFamily -> "Arial", 12], 
+        PlotLegends -> {
+         "Viajes estables en la ma\[NTilde]ana entre semana (artificiales)", 
+          "Encuesta", "Todos los viajes", "Casa trabajo", 
+          "Viajes entre semana", "Viajes en la ma\[NTilde]ana"}], 
+      "Specifications" :> {{$CellContext`A$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1024., {224., 232.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8945104736768093`*^9, 3.8945419897158003`*^9, 
+  3.894542673829667*^9, 3.894543024148923*^9, 3.894579273541845*^9, 
+  3.894928530761695*^9, 3.8950123801376715`*^9, 3.895016240537534*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1350, 685},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.4 Inherited,
+FrontEndVersion->"11.0 para Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 135, 3, 217, "Title"],
+Cell[CellGroupData[{
+Cell[740, 29, 122, 2, 124, "Chapter"],
+Cell[CellGroupData[{
+Cell[887, 35, 4332, 121, 1082, "Input"],
+Cell[5222, 158, 208, 3, 70, "Output"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[5479, 167, 149, 2, 107, "Chapter"],
+Cell[5631, 171, 4618, 127, 506, "Input"]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10298, 304, 270, 5, 179, "Title"],
+Cell[CellGroupData[{
+Cell[10593, 313, 253, 4, 124, "Chapter"],
+Cell[10849, 319, 5461, 115, 972, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[16347, 439, 225, 3, 107, "Chapter"],
+Cell[16575, 444, 3947, 112, 1495, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[20559, 561, 203, 3, 107, "Chapter"],
+Cell[CellGroupData[{
+Cell[20787, 568, 158, 2, 92, "Subchapter"],
+Cell[20948, 572, 749, 17, 151, "Input"],
+Cell[21700, 591, 1214, 24, 146, "Input"],
+Cell[22917, 617, 8619, 216, 1922, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[31573, 838, 177, 3, 68, "Subchapter"],
+Cell[CellGroupData[{
+Cell[31775, 845, 6917, 154, 826, "Input"],
+Cell[38695, 1001, 2721, 53, 469, "Output"],
+Cell[41419, 1056, 2225, 43, 469, "Output"],
+Cell[43647, 1101, 2035, 41, 469, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45719, 1147, 211, 5, 95, "Input"],
+Cell[45933, 1154, 93, 1, 43, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46087, 1162, 250, 4, 124, "Chapter"],
+Cell[CellGroupData[{
+Cell[46362, 1170, 158, 2, 128, "Subchapter"],
+Cell[46523, 1174, 719, 17, 211, "Input"],
+Cell[47245, 1193, 1206, 24, 161, "Input"],
+Cell[48454, 1219, 8220, 210, 2455, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[56711, 1434, 231, 4, 95, "Subchapter"],
+Cell[56945, 1440, 7247, 160, 1232, "Input"],
+Cell[CellGroupData[{
+Cell[64217, 1604, 507, 9, 100, "Input"],
+Cell[64727, 1615, 3016, 59, 707, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67780, 1679, 394, 7, 140, "Input"],
+Cell[68177, 1688, 2397, 46, 656, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70611, 1739, 278, 6, 140, "Input"],
+Cell[70892, 1747, 2564, 48, 656, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[73517, 1802, 339, 5, 107, "Chapter"],
+Cell[CellGroupData[{
+Cell[73881, 1811, 158, 2, 128, "Subchapter"],
+Cell[74042, 1815, 653, 16, 172, "Input"],
+Cell[74698, 1833, 1028, 22, 161, "Input"],
+Cell[75729, 1857, 8446, 217, 2527, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[84212, 2079, 177, 3, 95, "Subchapter"],
+Cell[84392, 2084, 6903, 155, 1232, "Input"],
+Cell[CellGroupData[{
+Cell[91320, 2243, 507, 9, 100, "Input"],
+Cell[91830, 2254, 2920, 57, 707, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94787, 2316, 394, 7, 140, "Input"],
+Cell[95184, 2325, 2379, 45, 656, "Output"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[97600, 2375, 278, 6, 125, "Input"],
+Cell[97881, 2383, 2428, 46, 656, "Output"]
+}, Closed]],
+Cell[100324, 2432, 122, 2, 46, "Input"],
+Cell[100449, 2436, 170, 2, 60, "Input"]
+}, Closed]]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[100680, 2445, 243, 4, 217, "Title"],
+Cell[CellGroupData[{
+Cell[100948, 2453, 253, 4, 124, "Chapter"],
+Cell[101204, 2459, 4532, 92, 620, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[105773, 2556, 225, 3, 124, "Chapter"],
+Cell[106001, 2561, 3947, 112, 1495, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[109985, 2678, 203, 3, 107, "Chapter"],
+Cell[CellGroupData[{
+Cell[110213, 2685, 158, 2, 128, "Subchapter"],
+Cell[110374, 2689, 904, 20, 172, "Input"],
+Cell[111281, 2711, 8997, 242, 2527, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[120315, 2958, 177, 3, 95, "Subchapter"],
+Cell[120495, 2963, 5723, 121, 868, "Input"],
+Cell[CellGroupData[{
+Cell[126243, 3088, 507, 9, 100, "Input"],
+Cell[126753, 3099, 3039, 57, 721, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[129829, 3161, 278, 6, 140, "Input"],
+Cell[130110, 3169, 2410, 45, 721, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[132557, 3219, 319, 5, 89, "Input"],
+Cell[132879, 3226, 326, 5, 140, "Output"]
+}, Open  ]]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[133266, 3238, 250, 4, 107, "Chapter"],
+Cell[CellGroupData[{
+Cell[133541, 3246, 158, 2, 128, "Subchapter"],
+Cell[133702, 3250, 844, 19, 211, "Input"],
+Cell[134549, 3271, 8675, 236, 2405, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[143261, 3512, 231, 4, 95, "Subchapter"],
+Cell[143495, 3518, 5984, 127, 978, "Input"],
+Cell[CellGroupData[{
+Cell[149504, 3649, 507, 9, 100, "Input"],
+Cell[150014, 3660, 2967, 58, 721, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[153018, 3723, 278, 6, 140, "Input"],
+Cell[153299, 3731, 2588, 48, 721, "Output"]
+}, Open  ]]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[155948, 3786, 339, 5, 107, "Chapter"],
+Cell[CellGroupData[{
+Cell[156312, 3795, 158, 2, 128, "Subchapter"],
+Cell[156473, 3799, 779, 19, 172, "Input"],
+Cell[157255, 3820, 8493, 232, 2405, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[165785, 4057, 177, 3, 128, "Subchapter"],
+Cell[165965, 4062, 5599, 120, 978, "Input"],
+Cell[CellGroupData[{
+Cell[171589, 4186, 507, 9, 100, "Input"],
+Cell[172099, 4197, 2885, 55, 670, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[175021, 4257, 278, 6, 140, "Input"],
+Cell[175302, 4265, 2452, 46, 716, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
